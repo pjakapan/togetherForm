@@ -132,8 +132,9 @@
         }, 200);
         $rootScope.form = loadForm();
         $rootScope.myFunc = function () {
-          console.log(editor.getText());
+          
           $rootScope.form = editor.getText();
+          console.log(editor.getText());
         };
       }]);
   </script>
