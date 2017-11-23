@@ -10,6 +10,7 @@
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' />
   <link rel='stylesheet' href='css/formio-full.css' />
   <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' />
+  <link rel='stylesheet' href='css/jsoneditor.css' />
 </head>
 
 <body ng-app='formRenderer'>
@@ -83,7 +84,14 @@
           <h3 class='text-center text-muted'>A JSON Schema</h3>
           <pre class='bg-info'><h4><code>$rootScope.form = </code></h4></pre>
           <div class='well jsonviewer'>
-            <json-explorer data='form' collapsed='jsonCollapsed'></json-explorer>
+              <p>
+                  Load a JSON document: <input type="file" id="loadDocument" value="Load"/>
+                </p>
+                <p>
+                  Save a JSON document: <input type="button" id="saveDocument" value="Save" />
+                </p>
+                
+                <div id="jsoneditor"></div>
           </div>
         </div>
       </div>
@@ -111,6 +119,9 @@
   <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js'></script>
   <script src='https://cdn.rawgit.com/odra/ng-json-explorer/master/dist/angular-json-explorer.min.js'></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://bgrins.github.io/filereader.js/filereader.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+  <script src="js/jsoneditor.js"></script>
   <script type='text/javascript'>
     angular
       .module('formRenderer', ['ui.bootstrap', 'ui.select', 'formio', 'ngJsonExplorer'])
@@ -423,6 +434,39 @@
         };
       }]);
   </script>
+  <script>
+      // create the editor
+      var editor = new JSONEditor(document.getElementById('jsoneditor'));
+    
+      // Load a JSON document
+      FileReaderJS.setupInput(document.getElementById('loadDocument'), {
+        readAsDefault: 'Text',
+        on: {
+          load: function (event, file) {
+            editor.setText(event.target.result);
+          }
+        }
+      });
+    
+      // Save a JSON document
+      document.getElementById('saveDocument').onclick = function () {
+        // Save Dialog
+        fname = window.prompt("Save as...");
+        
+        // Check json extension in file name
+        if(fname.indexOf(".")==-1){
+          fname = fname + ".json";
+        }else{
+          if(fname.split('.').pop().toLowerCase() == "json"){
+            // Nothing to do
+          }else{
+            fname = fname.split('.')[0] + ".json";
+          }
+        } 
+        var blob = new Blob([editor.getText()], {type: 'application/json;charset=utf-8'});
+        saveAs(blob, fname);
+      };
+    </script>
 
 
 
