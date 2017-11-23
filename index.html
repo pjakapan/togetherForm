@@ -126,6 +126,7 @@
         $timeout(function () {
           $rootScope.jsonCollapsed = false;
         }, 200);
+        $rootScope.form = {};
         $rootScope.myFunc = function () {
 
           $rootScope.form = JSON.parse(editor.getText());
