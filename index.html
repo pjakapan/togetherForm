@@ -136,7 +136,7 @@
   </script>
   <script>
     // create the editor
-    var editor = new JSONEditor(document.getElementById('jsoneditor'),"code");
+    var editor = new JSONEditor(document.getElementById('jsoneditor'),{ mode: "code" });
 
     // Load a JSON document
     FileReaderJS.setupInput(document.getElementById('loadDocument'), {
