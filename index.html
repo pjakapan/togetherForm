@@ -95,7 +95,7 @@
               Save a JSON document:
               <input type="button" id="saveDocument" value="Save" />
             </p>
-
+                <button ng-click="myFunc()">Preview</button>
             <div id="jsoneditor"></div>
           </div>
         </div>
@@ -132,6 +132,9 @@
         }, 200);
         console.log(editor.getText());
         $rootScope.form = loadForm();
+        $scope.myFunc = function() {
+        console.log(editor.getText());
+        };
       }]);
   </script>
   <script>
