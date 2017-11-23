@@ -95,7 +95,7 @@
               Save a JSON document:
               <input type="button" id="saveDocument" value="Save" />
             </p>
-                <button ng-click="myFunc()">Preview</button>
+            <button ng-click="myFunc()">Preview</button>
             <div id="jsoneditor"></div>
           </div>
         </div>
@@ -130,16 +130,15 @@
         $timeout(function () {
           $rootScope.jsonCollapsed = false;
         }, 200);
-        console.log(editor.getText());
         $rootScope.form = loadForm();
-        $rootScope.myFunc = function() {
-        console.log(editor.getText());
+        $rootScope.myFunc = function () {
+          $rootScope.form = editor.getText();
         };
       }]);
   </script>
   <script>
     // create the editor
-    var editor = new JSONEditor(document.getElementById('jsoneditor'),{ mode: "code" });
+    var editor = new JSONEditor(document.getElementById('jsoneditor'), { mode: "code" });
 
     // Load a JSON document
     FileReaderJS.setupInput(document.getElementById('loadDocument'), {
