@@ -133,7 +133,7 @@
         $rootScope.form = loadForm();
         $rootScope.myFunc = function () {
           
-          $rootScope.form = editor.getText();
+          $rootScope.form = JSON.parse(editor.getText());
           console.log(editor.getText());
         };
       }]);
