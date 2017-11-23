@@ -174,8 +174,49 @@
       }]);
   </script>
   <script>
+    var exampleJson = {
+      "components": [
+        {
+          "properties": {
+            "": ""
+          },
+          "tags": [],
+          "type": "textfield",
+          "conditional": {
+            "eq": "",
+            "when": null,
+            "show": ""
+          },
+          "validate": {
+            "customPrivate": false,
+            "custom": "",
+            "pattern": "",
+            "maxLength": "",
+            "minLength": "",
+            "required": false
+          },
+          "clearOnHide": true,
+          "hidden": false,
+          "persistent": true,
+          "unique": false,
+          "protected": false,
+          "defaultValue": "",
+          "multiple": false,
+          "suffix": "",
+          "prefix": "",
+          "placeholder": "",
+          "key": "exampleForm",
+          "label": "Example Form",
+          "inputMask": "",
+          "inputType": "text",
+          "tableView": true,
+          "input": true
+        }
+      ]
+    };
+
     // create the editor
-    var editor = new JSONEditor(document.getElementById('jsoneditor'), { mode: "code" });
+    var editor = new JSONEditor(document.getElementById('jsoneditor'), { mode: "code" },exampleJson);
 
     // Load a JSON document
     FileReaderJS.setupInput(document.getElementById('loadDocument'), {
