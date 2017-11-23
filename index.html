@@ -17,7 +17,7 @@
   <!-- BROWSE HAPPY BEGINS HERE -->
   <style>
     #jsoneditor {
-      height: auto;
+      height: 500px;
     }
 
     .browsehappy {
@@ -130,6 +130,7 @@
         $timeout(function () {
           $rootScope.jsonCollapsed = false;
         }, 200);
+        console.log(editor.getText());
         $rootScope.form = loadForm();
       }]);
   </script>
