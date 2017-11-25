@@ -94,10 +94,10 @@
           </div>
         </div>
         <div class='col-12 col-sm-12 col-lg-6'>
-          
+
           <pre class='text-center bg-info'><code><h4>Renders as a Form</h4></code></pre>
           <div class='well' style='background-color: #fdfdfd;'>
-              
+
             <formio form='form'></formio>
           </div>
         </div>
@@ -145,21 +145,28 @@
 
     // Save a JSON document
     document.getElementById('saveDocument').onclick = function () {
-      // Save Dialog
-      fname = window.prompt("Save as...");
 
-      // Check json extension in file name
-      if (fname.indexOf(".") == -1) {
-        fname = fname + ".json";
-      } else {
-        if (fname.split('.').pop().toLowerCase() == "json") {
-          // Nothing to do
-        } else {
-          fname = fname.split('.')[0] + ".json";
-        }
+      if (!IsJsonString()) {
+        AlertInvalid();
       }
-      var blob = new Blob([editor.getText()], { type: 'application/json;charset=utf-8' });
-      saveAs(blob, fname);
+      else {
+        // Save Dialog
+        fname = window.prompt("Save as...");
+
+        // Check json extension in file name
+        if (fname.indexOf(".") == -1) {
+          fname = fname + ".json";
+        } else {
+          if (fname.split('.').pop().toLowerCase() == "json") {
+            // Nothing to do
+          } else {
+            fname = fname.split('.')[0] + ".json";
+          }
+        }
+        var blob = new Blob([editor.getText()], { type: 'application/json;charset=utf-8' });
+        saveAs(blob, fname);
+      }
+
     };
 
     function IsJsonString() {
@@ -171,8 +178,8 @@
       return true;
     }
 
-    function AlertInvalid(){
-      $( ".setAlert" ).append( '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Danger!</strong> Invalid Json Format.</div></div>' );
+    function AlertInvalid() {
+      $(".setAlert").append('<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Danger!</strong> Invalid Json Format.</div></div>');
     }
   </script>
 </body>
