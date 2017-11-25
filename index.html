@@ -87,15 +87,17 @@
             <p>Save a JSON document:
               <input type="button" id="saveDocument" value="Save" />
               <button ng-click="myFunc()">Preview</button>
-              <button ng-click="myFunc2()">Validate</button>
             </p>
+            <div class="setAlert"></div>
 
             <div id="jsoneditor"></div>
           </div>
         </div>
         <div class='col-12 col-sm-12 col-lg-6'>
+          
           <pre class='text-center bg-info'><code><h4>Renders as a Form</h4></code></pre>
           <div class='well' style='background-color: #fdfdfd;'>
+              
             <formio form='form'></formio>
           </div>
         </div>
@@ -122,11 +124,7 @@
           $rootScope.jsonCollapsed = false;
         }, 200);
         $rootScope.myFunc = function () {
-          $rootScope.form = JSON.parse("{}");
-          $rootScope.form = JSON.parse(editor.getText());
-        };
-        $rootScope.myFunc = function () {
-          console.log(editor.validate());
+          IsJsonString() ? $rootScope.form = JSON.parse(editor.getText()) : AlertInvalid();
         };
       }]);
   </script>
@@ -163,6 +161,19 @@
       var blob = new Blob([editor.getText()], { type: 'application/json;charset=utf-8' });
       saveAs(blob, fname);
     };
+
+    function IsJsonString() {
+      try {
+        JSON.parse(editor.getText());
+      } catch (e) {
+        return false;
+      }
+      return true;
+    }
+
+    function AlertInvalid(){
+      $( ".setAlert" ).append( '<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Danger!</strong> Invalid Json Format.</div></div>' );
+    }
   </script>
 </body>
 
