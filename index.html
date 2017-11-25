@@ -5,11 +5,10 @@
   <meta charset='utf-8'>
   <title>Together Form Renderer</title>
   <meta name='viewport' content='width=device-width'>
-  <link rel='stylesheet' href='https://cdn.rawgit.com/odra/ng-json-explorer/master/dist/angular-json-explorer.min.css'>
-  <link rel='stylesheet' href='https://unpkg.com/bootswatch@3.3.7/yeti/bootstrap.min.css' />
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' />
+  <link rel='stylesheet' href='css/angular-json-explorer.min.css'>
+  <link rel='stylesheet' href='css.bootstrap.min.css' />
+  <link rel='stylesheet' href='css/ont-awesome.min.css' />
   <link rel='stylesheet' href='css/formio-full.css' />
-  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css' />
   <link rel='stylesheet' href='css/jsoneditor.css' />
 </head>
 
@@ -104,15 +103,15 @@
     </div>
   </div>
   </div>
-  <script src='https://cdn.ckeditor.com/4.5.11/standard/ckeditor.js'></script>
-  <script src='https://unpkg.com/signature_pad@1.5.3/signature_pad.min.js'></script>
+  <script src='js/ckeditor.js'></script>
+  <script src='js/signature_pad.min.js'></script>
   <script src='js/formio-full.js'></script>
   <script src='js/loadJsonForm.js'></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js'></script>
-  <script src='https://cdn.rawgit.com/odra/ng-json-explorer/master/dist/angular-json-explorer.min.js'></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://bgrins.github.io/filereader.js/filereader.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+  <script src='js/lodash.min.js'></script>
+  <script src='js/angular-json-explorer.min.js'></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/filereader.js"></script>
+  <script src="js/FileSaver.min.js"></script>
   <script src="js/jsoneditor.js"></script>
   <script type='text/javascript'>
     angular
@@ -132,7 +131,7 @@
       }]);
   </script>
   <script>
-    
+
     // create the editor
     var editor = new JSONEditor(document.getElementById('jsoneditor'), { mode: "code" });
 
