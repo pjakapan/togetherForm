@@ -86,7 +86,7 @@
             </p>
             <p>Save a JSON document:
               <input type="button" id="saveDocument" value="Save" />
-              <button ng-click="myFunc()">Preview</button>
+              <button ng-click="preViewFunc()">Preview</button>
             </p>
             <div class="setAlert"></div>
 
@@ -123,8 +123,8 @@
         $timeout(function () {
           $rootScope.jsonCollapsed = false;
         }, 200);
-        $rootScope.myFunc = function () {
-          IsJsonString() ? $rootScope.form = JSON.parse(editor.getText()) : AlertInvalid();
+        $rootScope.preViewFunc = function () {
+          IsJsonString() === 0 ? $rootScope.form = JSON.parse(editor.getText()) : AlertInvalid(IsJsonString());
         };
       }]);
   </script>
@@ -170,16 +170,20 @@
     };
 
     function IsJsonString() {
+      var state = 0;
       try {
         JSON.parse(editor.getText());
       } catch (e) {
-        return false;
+        return 2;
       }
-      return true;
+
+      return editor.getText() != "{}" ? 0 : 1
     }
 
-    function AlertInvalid() {
-      $(".setAlert").append('<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Danger!</strong> Invalid Json Format.</div></div>');
+    function AlertInvalid(state) {
+      state === 2
+        ? $(".setAlert").append('<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Danger!</strong> Invalid Json Format.</div></div>')
+        : $(".setAlert").append('<div class="alert alert-info alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Info! </strong>Json is emtpy</div></div>');
     }
   </script>
 </body>
