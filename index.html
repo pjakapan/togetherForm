@@ -146,8 +146,8 @@
     // Save a JSON document
     document.getElementById('saveDocument').onclick = function () {
 
-      if (!IsJsonString()) {
-        AlertInvalid();
+      if (!(IsJsonString() === 0)) {
+        AlertInvalid(IsJsonString());
       }
       else {
         // Save Dialog
