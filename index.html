@@ -10,10 +10,6 @@
   <link rel='stylesheet' href='css/font-awesome.min.css' />
   <link rel='stylesheet' href='css/formio-full.css' />
   <link rel='stylesheet' href='css/jsoneditor.css' />
-</head>
-
-<body ng-app='formRenderer'>
-  <!-- BROWSE HAPPY BEGINS HERE -->
   <style>
     #jsoneditor {
       height: 500px;
@@ -69,7 +65,119 @@
       height: 28px;
       vertical-align: top;
     }
+
+    .overlay {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: white;
+      z-index: 100;
+    }
+
+    .wrapper {
+      width: 100px;
+      height: 100px;
+      background: white;
+      display: flex;
+      flex-flow: row wrap;
+      position: relative;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 3px;
+    }
+
+    .box {
+      width: 50%;
+      height: 50%;
+      flex: 50%;
+      transition: 0.5s;
+      border: 2px solid white;
+    }
+
+    .box:nth-child(1) {
+      animation: load 1s infinite;
+    }
+
+    .box:nth-child(2) {
+      animation: load2 1s infinite;
+      animation-delay: 0.2s;
+    }
+
+    .box:nth-child(3) {
+      animation: load3 1s infinite;
+      animation-delay: 0.7s;
+    }
+
+    .box:nth-child(4) {
+      animation: load4 1s infinite;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes load {
+      0% {
+        background: rgba(231, 76, 60, 0);
+      }
+      30% {
+        background: rgb(231, 76, 60);
+      }
+
+      100% {
+        background: rgba(231, 76, 60, 0);
+      }
+    }
+
+    @keyframes load2 {
+      0% {
+        background: rgba(46, 204, 113, 0);
+      }
+      30% {
+        background: rgb(46, 204, 113);
+      }
+
+      100% {
+        background: rgba(46, 204, 113, 0);
+      }
+    }
+
+    @keyframes load3 {
+      0% {
+        background: rgba(230, 126, 34, 0);
+      }
+      30% {
+        background: rgb(230, 126, 34);
+      }
+
+      100% {
+        background: rgba(230, 126, 34, 0);
+      }
+    }
+
+    @keyframes load4 {
+      0% {
+        background: rgba(241, 196, 15, 0);
+      }
+      30% {
+        background: rgb(241, 196, 15);
+      }
+
+      100% {
+        background: rgba(241, 196, 15, 0);
+      }
+    }
   </style>
+</head>
+
+<body ng-app='formRenderer'>
+  <!-- BROWSE HAPPY BEGINS HERE -->
+  <div class="overlay">
+    <div class="wrapper">
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+    </div>
+  </div>
   <div class='jumbotron'>
     <div class='container text-center'>
       <h1>TOGETHER FORM RENDERER</h1>
@@ -104,7 +212,6 @@
       </div>
     </div>
   </div>
-  </div>
   <script src='js/ckeditor.js'></script>
   <script src='js/signature_pad.min.js'></script>
   <script src='js/formio-full.js'></script>
@@ -116,20 +223,9 @@
   <script src="js/FileSaver.min.js"></script>
   <script src="js/jsoneditor.js"></script>
   <script type='text/javascript'>
-    angular
-      .module('formRenderer', ['ui.bootstrap', 'ui.select', 'formio', 'ngJsonExplorer'])
-      .run(['$rootScope', '$timeout', function ($rootScope, $timeout) {
-        $rootScope.jsonCollapsed = true;
-        $timeout(function () {
-          $rootScope.jsonCollapsed = false;
-        }, 200);
-        $rootScope.preViewFunc = function () {
-          IsJsonString() === 0 ? $rootScope.form = JSON.parse(editor.getText()) : AlertInvalid(IsJsonString());
-        };
-      }]);
-  </script>
-  <script>
-
+    $(document).ready(function () {
+      $(".overlay").fadeOut(3000);
+    });
     // create the editor
     var editor = new JSONEditor(document.getElementById('jsoneditor'), { mode: "code" });
 
@@ -185,6 +281,19 @@
         ? $(".setAlert").append('<div class="alert alert-danger alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Danger!</strong> Invalid Json Format.</div></div>')
         : $(".setAlert").append('<div class="alert alert-info alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">×</a><strong>Info! </strong>Json is emtpy</div></div>');
     }
+  </script>
+  <script type='text/javascript'>
+    angular
+      .module('formRenderer', ['ui.bootstrap', 'ui.select', 'formio', 'ngJsonExplorer'])
+      .run(['$rootScope', '$timeout', function ($rootScope, $timeout) {
+        $rootScope.jsonCollapsed = true;
+        $timeout(function () {
+          $rootScope.jsonCollapsed = false;
+        }, 200);
+        $rootScope.preViewFunc = function () {
+          IsJsonString() === 0 ? $rootScope.form = JSON.parse(editor.getText()) : AlertInvalid(IsJsonString());
+        };
+      }]);
   </script>
 </body>
 
